@@ -1,4 +1,20 @@
-# Notes
+# Project Grading
+
+- Expectations don't scale with number of authors
+
+- "Grading" is about:
+
+  - quality of literature review
+  - quality of code/repoducibility
+  - validity of the ablation studies w.r.t. your project
+    - understanding what is affecting performance
+    - changing random seeds and understanding the distribution of results
+  - Analysis of why your solutionis work or not
+  - Quality of the 4-page report writing
+
+- "Grading" is **not** about beating the state of the art
+
+# Lecture Notes
 
 Self Supervised learning: Trying to learn a taks or representation that makes the model useful for other tasks. Example: Learning to classify shapes encodes the information to predict orientation, size, location, etc.
 
@@ -99,7 +115,7 @@ New Approach: Take a sample and a transformed version of itself. We want the res
 
 In General: The things that the model becomes invariant to are the tasks it will no longer be good at.
 
-## Lecture 4 - 9/11/2024
+## Lecture 4 - 2024/9/11
 
 ### Manifold Learning Motivation
 
@@ -109,7 +125,7 @@ In General: The things that the model becomes invariant to are the tasks it will
 
 - What could we do if we were given $x^{-1}$? (This would remove the image data and just retain the position/scale/orientation data)
 
-### Why "Manifold" Learning?
+#- ## Why "Manifold" Learning?
 
 - A **manifold** is a topological space that locally resembles Euclidean space near each point.
 
@@ -174,3 +190,72 @@ Datasets for coordinate Recovery: Sprites, 3dshapes, and celeba
 A more probability viewpoint
 
 - The encodier's output $f(x)$ is ow predicting a distribution's parameters e.g. mean and std for Gaussian.
+
+## Lecture 7 - 2023/09/18
+
+Nick's Note:
+
+- Could you train serveral distinct models on specific (and varied!) tasks, then concatenate their representations to make a single 'diverse' representation?
+  - This may work, but the resulting representation would be high-dimensional and therefore require a larger fine-tuning dataset.
+
+Pros of SSL:
+
+- The number of labels doesn't matter if the data is very noisy and the labels are accurate.
+- SSL can provide good representations without relying on labels.
+
+## Lecture 9 - 2024/09/23
+
+### Presentation #1
+
+- RL
+
+  - Model-free: Learning a mappiing from states -> action that gets greatest reward
+  - Online: Learn by interacting with the world
+  -
+
+- Learning (RL is otherwise) is hard to get right for robotics
+  - Very tough to collect enough observations in the real world
+  -
+
+### Presentation #2
+
+#### RL Overview
+
+- Goal: Maximize Cumulative Reward $\pi^*$
+
+#### SSL of Object-Centric Representations
+
+- Slot Attention, _Locatello at al._ (NeurIPS 202)
+
+- Deep Latent Particles (DSL), _Daniel and Tamar_ (ICML 2022)
+
+#### RL From Images Using Object-Centric Representations
+
+Model-free approaches
+
+- SMORL "Self-Supervised Visual Reinforcement Learning with Object-Centric Representations", _Zadaianchuk et al._ (ICLR 2021)
+
+- ECRL "Entity-Centric Reinforcement Learning for Object Manipulation from Pixels", _Haramati et al._ (ICLR 2024)
+
+Model-based
+
+- COBRA (Watters et al., 2019), STOVE (Kossen et al., 2019), NCS (Chang et al., 2023), FOCUS (Ferraro et al., 2023)
+
+#### Learning COmpositionally Generalizing WorldModels for Continuous Control
+
+Environment: IsaacGym-based (Makoviychuk et al, 2021) simulated table-top object manipulation
+
+Base Algorithm: TD-MPC2, Hansel et al. (ICLR 2024)
+
+Object-Centric Representation: DLP, Daniel and Tamar (ICML 2022)
+
+Questions:
+
+- Doess OC SSL facilitate compositionally generalizing model components?
+
+- What auxiliary SSL objectives best compliment object-centric learning?
+
+#### QA
+
+- The number of particles in the particle model is fixed
+- The center of mass is automatically found for each 'particle'/object using a differentiable operation
